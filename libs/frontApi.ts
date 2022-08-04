@@ -4,18 +4,18 @@ export const frontApi = () => ({
 
     getTenant: (tenantSlug: string): boolean | Tenant => {
         switch(tenantSlug) {
-            case 'delivery-burger':
+            case 'NextBurger':
                 return {
-                    slug: 'delivery-burger',
-                    name: 'delivery-burger',
+                    slug: 'NextBurger',
+                    name: 'NextBurger',
                     mainColor: '#FF0000',
                     secondColor: '#00FF00'
                 }
             break;
-            case 'delivery-pizza':
+            case 'NextPizza':
                 return {
-                    slug: 'delivery-pizza',
-                    name: 'delivery-pizza',
+                    slug: 'NextPizza',
+                    name: 'NextPizza',
                     mainColor: '#0000FF',
                     secondColor: '#FF0000'
                 }
