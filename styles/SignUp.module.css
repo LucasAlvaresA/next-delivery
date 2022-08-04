@@ -1,0 +1,52 @@
+.container {
+    background-color: #FFF;
+    padding: 50px 24px;
+}
+.header {
+    font-weight: bold;
+    font-size: 36px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.subtitle {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    color: rgba(27, 27, 27, 0.8);
+    text-align: center;
+    margin: auto;
+    width: 220px;
+    padding-bottom: 40px;
+    border-bottom: 1.5px solid #000;
+    position: relative;
+}
+
+.line {
+    border-top: 1.5px solid #E2E2E2;
+    margin-top: -1.5px;
+}
+
+.formArea {
+    margin-top: 56px;
+}
+
+.inputArea {
+    margin-bottom: 32px;
+}
+
+.forgetArea {
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
+    margin: auto;
+    color: #000;
+}
+
+.forgetArea a {
+    font-weight: 600;
+    text-decoration: none;
+    color: #000;
+    margin-left: 5px;
+}
