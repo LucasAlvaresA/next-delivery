@@ -1,15 +1,17 @@
 import { GetServerSideProps } from 'next';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Banner } from '../../components/Banner';
 import { ProductItem } from '../../components/ProductItem';
 import { SearchInput } from '../../components/SearchInput';
 import { useAppContext } from '../../contexts/AppContext';
 import { frontApi } from '../../libs/frontApi';
 import styles from '../../styles/Home.module.css';
+import { Product } from '../../types/Product';
 import { Tenant } from '../../types/Tenant';
 
 const Home = (data: Props) => {
   const { tenant, setTenant } = useAppContext();
+  const [products, setProducts] = useState<Product[]>(data.products);
 
   useEffect(() => {
     setTenant(data.tenant);
@@ -50,60 +52,12 @@ const Home = (data: Props) => {
       </header>
       <Banner />
       <div className={styles.grid}>
-        <ProductItem
-          data={{
-            id: 1,
-            image: '/temp/burger.png',
-            categoryName: 'Tradicional',
-            name: 'X-Burger',
-            price: 'R$ 20,00'
-          }}
-        />
-        <ProductItem
-          data={{
-            id: 1,
-            image: '/temp/burger.png',
-            categoryName: 'Tradicional',
-            name: 'X-Burger',
-            price: 'R$ 20,00'
-          }}
-        />
-        <ProductItem
-          data={{
-            id: 1,
-            image: '/temp/burger.png',
-            categoryName: 'Tradicional',
-            name: 'X-Burger',
-            price: 'R$ 20,00'
-          }}
-        />
-        <ProductItem
-          data={{
-            id: 1,
-            image: '/temp/burger.png',
-            categoryName: 'Tradicional',
-            name: 'X-Burger',
-            price: 'R$ 20,00'
-          }}
-        />
-        <ProductItem
-          data={{
-            id: 1,
-            image: '/temp/burger.png',
-            categoryName: 'Tradicional',
-            name: 'X-Burger',
-            price: 'R$ 20,00'
-          }}
-        />
-        <ProductItem
-          data={{
-            id: 1,
-            image: '/temp/burger.png',
-            categoryName: 'Tradicional',
-            name: 'X-Burger',
-            price: 'R$ 20,00'
-          }}
-        />
+        {products.map((item, index) => (
+          <ProductItem
+            key={index}
+            data={item}
+          />
+        ))}
       </div>
     </div>
   );
@@ -112,14 +66,17 @@ const Home = (data: Props) => {
 export default Home
 
 type Props = {
-  tenant: Tenant
+  tenant: Tenant,
+  products: Product[]
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { tenant: tenantSlug } = context.query;
-  const api = frontApi();
+  const api = frontApi(tenantSlug as string);
 
-  const tenant = await api.getTenant(tenantSlug as string);
+
+  // Get Tenant
+  const tenant = await api.getTenant();
   if (!tenant) {
     return {
       redirect: {
@@ -129,9 +86,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   }
 
+  // Get Products
+  const products = await api.getAllProducts();
+
   return {
     props: {
-      tenant
+      tenant,
+      products
     }
   }
 }
