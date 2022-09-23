@@ -1,13 +1,11 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Icon } from '../../components/Icon';
-import { InputField } from '../../components/InputField';
-import { useAppContext } from '../../contexts/AppContext';
+import { useAppContext } from '../../contexts/app';
 import { frontApi } from '../../libs/frontApi';
 import styles from '../../styles/ForgetSuccess.module.css';
 import { Tenant } from '../../types/Tenant';

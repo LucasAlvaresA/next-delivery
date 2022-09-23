@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { InputField } from '../../components/InputField';
-import { useAppContext } from '../../contexts/AppContext';
+import { useAppContext } from '../../contexts/app';
 import { frontApi } from '../../libs/frontApi';
 import styles from '../../styles/Login.module.css';
 import { Tenant } from '../../types/Tenant';

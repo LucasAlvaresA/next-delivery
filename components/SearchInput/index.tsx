@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './styles.module.css';
 import SearchIcon from './searchIcon.svg';
-import { useAppContext } from '../../contexts/AppContext';
+import { useAppContext } from '../../contexts/app';
 
 type Props = {
     onSearch: (searchValue: string) => void;

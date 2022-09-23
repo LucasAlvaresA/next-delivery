@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Banner } from '../../components/Banner';
 import { ProductItem } from '../../components/ProductItem';
 import { SearchInput } from '../../components/SearchInput';
-import { useAppContext } from '../../contexts/AppContext';
+import { useAppContext } from '../../contexts/app';
 import { frontApi } from '../../libs/frontApi';
 import styles from '../../styles/Home.module.css';
 import { Product } from '../../types/Product';

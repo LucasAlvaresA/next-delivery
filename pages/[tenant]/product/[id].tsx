@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '../../../components/Button';
 import { Header } from '../../../components/Header';
 import { Quantity } from '../../../components/Quantity';
-import { useAppContext } from '../../../contexts/AppContext';
+import { useAppContext } from '../../../contexts/app';
 import { formatter } from '../../../libs/formatter';
 import { frontApi } from '../../../libs/frontApi';
 import styles from '../../../styles/Product-id.module.css';
