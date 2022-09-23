@@ -7,11 +7,13 @@ import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { InputField } from '../../components/InputField';
 import { useAppContext } from '../../contexts/app';
+import { useAuthContext } from '../../contexts/auth';
 import { frontApi } from '../../libs/frontApi';
 import styles from '../../styles/Login.module.css';
 import { Tenant } from '../../types/Tenant';
 
 const Login = (data: Props) => {
+  const { setToken, setUser } = useAuthContext();
   const { tenant, setTenant } = useAppContext();
   const router = useRouter();
 
@@ -21,9 +23,14 @@ const Login = (data: Props) => {
   useEffect(() => {
     setTenant(data.tenant);
   }, [])
-
+  
   const handleSubmit = () => {
-
+    setToken('1234');
+    setUser({
+      name: 'Test User',
+      email: 'teste@teste.com'
+    })
+    router.push(`/${data.tenant.slug}`);
   }
 
   const handleSignUp = () => {

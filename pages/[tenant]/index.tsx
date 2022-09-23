@@ -9,14 +9,22 @@ import { frontApi } from '../../libs/frontApi';
 import styles from '../../styles/Home.module.css';
 import { Product } from '../../types/Product';
 import { Tenant } from '../../types/Tenant';
+import { getCookie } from 'cookies-next';
+import { User } from '../../types/User';
+import { useAuthContext } from '../../contexts/auth';
 
 const Home = (data: Props) => {
+  const { setToken, setUser } = useAuthContext();
   const { tenant, setTenant } = useAppContext();
   const [products, setProducts] = useState<Product[]>(data.products);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     setTenant(data.tenant);
+    setToken(data.token);
+    if (data.user) {
+      setUser(data.user);
+    }
   }, [])
 
   const handleSearch = (searchValue: string) => {
@@ -77,13 +85,14 @@ export default Home
 
 type Props = {
   tenant: Tenant,
-  products: Product[]
+  products: Product[],
+  token: string,
+  user: User | null
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { tenant: tenantSlug } = context.query;
   const api = frontApi(tenantSlug as string);
-
 
   // Get Tenant
   const tenant = await api.getTenant();
@@ -96,13 +105,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   }
 
+  // Get Logged User
+  const token = getCookie('token', context) ?? ''
+  const user = await api.authorizeToken(token as string);
+
   // Get Products
   const products = await api.getAllProducts();
 
   return {
     props: {
       tenant,
-      products
+      products,
+      user,
+      token
     }
   }
 }
