@@ -16,8 +16,11 @@ import { useAuthContext } from '../../contexts/auth';
 const Home = (data: Props) => {
   const { setToken, setUser } = useAuthContext();
   const { tenant, setTenant } = useAppContext();
+
   const [products, setProducts] = useState<Product[]>(data.products);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     setTenant(data.tenant);
@@ -27,9 +30,17 @@ const Home = (data: Props) => {
     }
   }, [])
 
-  const handleSearch = (searchValue: string) => {
-    console.log(searchValue);
-  }
+  useEffect(() => {
+    let newFilteredProducts: Product[] = [];
+    for(let product of data.products) {
+      if(product.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1) {
+        newFilteredProducts.push(product);
+      }
+    }
+    setFilteredProducts(newFilteredProducts)
+  },[searchText])
+
+  const handleSearch = (value: string) => setSearchText(value)
 
   return (
     <div className={styles.container}>
