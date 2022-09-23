@@ -19,18 +19,16 @@ export const frontApi = (tenantSlug: string) => ({
                 return {
                     slug: 'NextBurger',
                     name: 'NextBurger',
-                    mainColor: '#FF0000',
-                    secondColor: '#00FF00'
+                    mainColor: '#FB9400',
+                    secondColor: '#FFF9F2'
                 }
-            break;
             case 'NextPizza':
                 return {
                     slug: 'NextPizza',
                     name: 'NextPizza',
-                    mainColor: '#0000FF',
-                    secondColor: '#FF0000'
+                    mainColor: '#6AB70A',
+                    secondColor: '#E0E0E0'
                 }
-            break;
             default: return false;
         }
     },
