@@ -1,3 +1,4 @@
+import { CartItem } from "../types/CartItem";
 import { Product } from "../types/Product";
 import { Tenant } from "../types/Tenant";
 import { User } from "../types/User";
@@ -55,6 +56,26 @@ export const frontApi = (tenantSlug: string) => ({
             name: 'Test User',
             email: 'teste@teste.com'
         }
+    },
+
+    getCartProducts: async (cartCookie: string) => {
+        let cart: CartItem[] = [];
+        if(!cartCookie) return cart
+
+        const cartJson = JSON.parse(cartCookie);
+        for(let i in cartJson) {
+            if(cartJson[i].id && cartJson[i].qt) {
+                const product = {
+                    ...TEMPORARYoneProduct,
+                    id: cartJson[i].id
+                }
+                cart.push({
+                    qt: cartJson[i].qt,
+                    product
+                })
+            }
+        }
+        return cart;
     }
 
 });

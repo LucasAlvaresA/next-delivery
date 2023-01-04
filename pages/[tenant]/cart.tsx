@@ -13,11 +13,14 @@ import { Header } from '../../components/Header';
 import { InputField } from '../../components/InputField';
 import { Button } from '../../components/Button';
 import { formatter } from '../../libs/formatter';
+import { CartItem } from '../../types/CartItem';
+import { useRouter } from 'next/router';
 
 const Cart = (data: Props) => {
   const { setToken, setUser } = useAuthContext();
   const { tenant, setTenant } = useAppContext();
   const useFormatter = formatter();
+  const router = useRouter();
 
   useEffect(() => {
     setTenant(data.tenant);
@@ -27,15 +30,36 @@ const Cart = (data: Props) => {
     }
   }, [])
 
+  // Product control
+  const [cart, setCart] = useState<CartItem[]>(data.cart);
+
+  // Shipping
   const [shippingInput, setShippingInput] = useState('');
+  const [shippingAddress, setShippingAddress] = useState('');
   const [shippingPrice, setShippingPrice] = useState(0);
+  const [shippingTime, setShippingTime] = useState(0);
+
+  const handleShippingCalc = () => {
+    setShippingAddress('Rua das Flores - Jardins da Serra - Campina Pequena')
+    setShippingPrice(9.50);
+    setShippingTime(20);
+  }
+
+  // Resume
   const [subtotal, setSubtotal] = useState(0);
   
-  const handleShippingCalc = () => {}
+  useEffect(() => {
+    let sub = 0;
+    for(let i in cart) {
+      sub += cart[i].product.price * cart[i].qt;
+    }
+    setSubtotal(sub);
+  },[cart])
 
-  const handleFinish = () => {}
+  const handleFinish = () => {
+    router.push(`/${data.tenant.slug}/checkout`);
+  }
   
-
   return (
     <div className={styles.container}>
       <Head>
@@ -48,7 +72,7 @@ const Cart = (data: Props) => {
         title="Sacola"
       />
 
-      <div className={styles.productsQuantity}>x itens</div>
+      <div className={styles.productsQuantity}>{cart.length} {cart.length === 1 ? 'item' : 'itens'}</div>
 
       <div className={styles.productsList}></div>
 
@@ -67,18 +91,20 @@ const Cart = (data: Props) => {
             onClick={handleShippingCalc}
           />
         </div>
-        <div className={styles.shippingInfo}>
-          <div className={styles.shippingAddress}>Rua das Flores - Jardins da Serra - Campina Pequenaa</div>
-          <div className={styles.shippingTime}>
-            <div className={styles.shippingTimeText}>Recebe em até 20 minutos</div>
-            <div 
-              className={styles.shippingPrice}
-              style={{ color: data.tenant.mainColor}}
-            >
-              {useFormatter.formatPrice(shippingPrice)}
+        {shippingTime > 0 &&
+          <div className={styles.shippingInfo}>
+            <div className={styles.shippingAddress}>{shippingAddress}</div>
+            <div className={styles.shippingTime}>
+              <div className={styles.shippingTimeText}>Recebe em até {shippingTime} minutos</div>
+              <div 
+                className={styles.shippingPrice}
+                style={{ color: data.tenant.mainColor}}
+              >
+                {useFormatter.formatPrice(shippingPrice)}
+              </div>
             </div>
           </div>
-        </div>
+        }
       </div>
 
       <div className={styles.resumeArea}>
@@ -118,9 +144,9 @@ export default Cart
 
 type Props = {
   tenant: Tenant,
-  products: Product[],
   token: string,
-  user: User | null
+  user: User | null,
+  cart: CartItem[]
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -142,15 +168,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const token = getCookie('token', context) ?? ''
   const user = await api.authorizeToken(token as string);
 
-  // Get Products
-  const products = await api.getAllProducts();
+  // Get Cart Products
+  const cartCookie = getCookie('cart', context);
+  const cart = await api.getCartProducts(cartCookie as string);
 
   return {
     props: {
       tenant,
-      products,
       user,
-      token
+      token,
+      cart
     }
   }
 }
