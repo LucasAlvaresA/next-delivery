@@ -68,7 +68,7 @@ const Cart = (data: Props) => {
           />
         </div>
         <div className={styles.shippingInfo}>
-          <div className={styles.shippingAddress}>Rua bla bla bla</div>
+          <div className={styles.shippingAddress}>Rua das Flores - Jardins da Serra - Campina Pequenaa</div>
           <div className={styles.shippingTime}>
             <div className={styles.shippingTimeText}>Recebe em até 20 minutos</div>
             <div 
