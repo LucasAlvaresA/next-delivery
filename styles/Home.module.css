@@ -56,3 +56,28 @@
   gap: 24px;
   margin: 0px 24px 0px 24px;
 }
+
+.searchText {
+  margin: 24px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #979797;
+}
+
+.searchText strong {
+  font-weight: 600;
+}
+
+.noProducts {
+  width: 235px;
+  margin: 88px auto;
+}
+
+.noProductsText {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #CDCDCD;
+  text-align: center;
+  margin-top: 32px;
+}

@@ -1,5 +1,7 @@
+import { getCookie, hasCookie, setCookie } from 'cookies-next';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Button } from '../../../components/Button';
 import { Header } from '../../../components/Header';
@@ -8,6 +10,7 @@ import { useAppContext } from '../../../contexts/app';
 import { formatter } from '../../../libs/formatter';
 import { frontApi } from '../../../libs/frontApi';
 import styles from '../../../styles/Product-id.module.css';
+import { CartCookie } from '../../../types/CartCookie';
 import { Product } from '../../../types/Product';
 import { Tenant } from '../../../types/Tenant';
 
@@ -17,11 +20,40 @@ const Product = (data: Props) => {
         setTenant(data.tenant);
     }, [])
 
+    const Router = useRouter();
+    const fixPrice = formatter();
+
     const [qtCount, setQtCount] = useState(1);
 
-    const fixPrice = formatter();
     const handleAddToCart = () => {
+        let cart: CartCookie[] = [];
 
+        // create or get existing cart
+        if(hasCookie('cart')) {
+            const cartCookie = getCookie('cart');
+            const cartJson: CartCookie[] = JSON.parse(cartCookie as string);
+            for(let i in cartJson) {
+                if(cartJson[i].qt && cartJson[i].id) {
+                    cart.push(cartJson[i]);
+                }
+            }
+        }
+
+        // search product in cart
+        const cartIndex = cart.findIndex(item => item.id === data.product.id);
+        if(cartIndex > -1) {
+            cart[cartIndex].qt += qtCount;
+        } else {
+            cart.push({ id: data.product.id, qt: qtCount });
+        }
+
+        console.log(cart);
+
+        // setting cookie
+        setCookie('cart', JSON.stringify(cart));
+
+        // going to cart
+        Router.push(`/${data.tenant.slug}/cart`);
     }
 
     const handleUpdateQt = (newCount: number) => {
@@ -120,7 +152,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 
     // Get Product
-    const product = await api.getProduct(id as string);
+    const product = await api.getProduct(parseInt(id as string));
 
     return {
         props: {
