@@ -109,7 +109,7 @@ const Checkout = (data: Props) => {
           <div className={styles.infoBody}>
             <ButtonWithIcon 
               color={data.tenant.mainColor}
-              leftIcon={"location"}
+              leftIcon="location"
               rightIcon={"rightArrow"}
               value={"Rua das Flores - Jardins da Serra - Campina Pequena"}
               onClick={() => {handleChangeAddress}}
@@ -120,21 +120,49 @@ const Checkout = (data: Props) => {
         <div className={styles.infoArea}>
           <div className={styles.infoTitle}>Tipo de pagamento</div>
           <div className={styles.infoBody}>
-            ...
+            <div className={styles.paymentTypes}>
+              <div className={styles.paymentBtn}>
+                <ButtonWithIcon 
+                  color={data.tenant.mainColor}
+                  leftIcon="money"
+                  value={"Dinheiro"}
+                  onClick={() => {}}
+                  fill
+                />
+              </div>
+              <div className={styles.paymentBtn}>
+                <ButtonWithIcon 
+                  color={data.tenant.mainColor}
+                  leftIcon="card"
+                  value={"Cartão"}
+                  onClick={() => {}}
+                />
+              </div>
+            </div>
           </div>
         </div>
 
         <div className={styles.infoArea}>
           <div className={styles.infoTitle}>Troco</div>
           <div className={styles.infoBody}>
-            ...
+            <InputField 
+              color={data.tenant.mainColor}
+              placeholder="Quanto você tem em dinheiro?"
+              value=""
+              onChange={newValue => {}}
+            />
           </div>
         </div>
 
         <div className={styles.infoArea}>
           <div className={styles.infoTitle}>Cupom de desconto</div>
           <div className={styles.infoBody}>
-            ...
+            <ButtonWithIcon 
+              color={data.tenant.mainColor}
+              leftIcon="cupom"
+              rightIcon="checked"
+              value="CUPOMSHOW10"
+            />
           </div>
         </div>
       </div>
@@ -165,6 +193,7 @@ const Checkout = (data: Props) => {
             quantity={cartItem.qt}
             product={cartItem.product}
             onChange={handleCartChange}
+            noEdit
           />
         ))}
       </div>

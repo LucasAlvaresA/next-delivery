@@ -19,6 +19,21 @@
     margin-bottom: 8px;
 }
 
+.paymentTypes {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.paymentTypes .paymentBtn {
+    flex: 1;
+}
+
+
+
+
+
+
 
 
 
