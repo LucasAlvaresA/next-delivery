@@ -17,6 +17,7 @@ import { CartItem } from '../../types/CartItem';
 import { useRouter } from 'next/router';
 import { CartProductItem } from '../../components/CartProductItem';
 import { CartCookie } from '../../types/CartCookie';
+import { ButtonWithIcon } from '../../components/ButtonWithIcon';
 
 const Checkout = (data: Props) => {
   const { setToken, setUser } = useAuthContext();
@@ -88,6 +89,8 @@ const Checkout = (data: Props) => {
     router.push(`/${data.tenant.slug}/checkout`);
   }
 
+  const handleChangeAddress = () => {}
+
   return (
     <div className={styles.container}>
       <Head>
@@ -104,7 +107,13 @@ const Checkout = (data: Props) => {
         <div className={styles.infoArea}>
           <div className={styles.infoTitle}>Endereço</div>
           <div className={styles.infoBody}>
-            ...
+            <ButtonWithIcon 
+              color={data.tenant.mainColor}
+              leftIcon={"location"}
+              rightIcon={"rightArrow"}
+              value={"Rua das Flores - Jardins da Serra - Campina Pequena"}
+              onClick={() => {handleChangeAddress}}
+            />
           </div>
         </div>
 
