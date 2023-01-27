@@ -43,8 +43,9 @@ const MyAddresses = (data: Props) => {
     router.push(`/${data.tenant.slug}/address/${id}`);
   }
 
-  const handleAddressDelete = (id: number) => {
-
+  const handleAddressDelete = async (id: number) => {
+    await api.deleteUserAddress(id);
+    router.reload();
   }
 
   const handleNewAddress = () => {
@@ -52,7 +53,7 @@ const MyAddresses = (data: Props) => {
   }
 
   // Menu events
-  const [menuOpened, setMenuOpened] = useState(2);
+  const [menuOpened, setMenuOpened] = useState(0);
 
   const handleMenuEvent = (e: MouseEvent) => {
     const tagName = (e.target as Element).tagName;
