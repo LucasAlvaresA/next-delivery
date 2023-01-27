@@ -17,9 +17,10 @@ import { AddressItem } from '../../components/AddressItem';
 
 const MyAddresses = (data: Props) => {
   const { setToken, setUser } = useAuthContext();
-  const { tenant, setTenant } = useAppContext();
+  const { tenant, setTenant, setShippingAddress, setShippingPrice } = useAppContext();
   const useFormatter = formatter();
   const router = useRouter();
+  const api = frontApi(data.tenant.slug);
 
   useEffect(() => {
     setTenant(data.tenant);
@@ -33,8 +34,13 @@ const MyAddresses = (data: Props) => {
     router.push(`/${data.tenant.slug}/newaddress`);
   }
 
-  const handleAddressSelect = (address: Address) => {
-
+  const handleAddressSelect = async (address: Address) => {
+    const price = await api.getShippingPrice(address);
+    if (price) {
+      setShippingAddress(address);
+      setShippingPrice(price);
+      router.push(`/${data.tenant.slug}/checkout`);
+    }
   }
 
   const handleAddressEdit = (id: number) => {

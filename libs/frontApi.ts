@@ -95,6 +95,10 @@ export const frontApi = (tenantSlug: string) => ({
         }
 
         return addresses;
+    },
+
+    getShippingPrice: async (address: Address) => {
+        return 9.50
     }
 
 });
