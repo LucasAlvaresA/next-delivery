@@ -13,6 +13,7 @@ import { formatter } from '../../libs/formatter';
 import { useRouter } from 'next/router';
 import { Button } from '../../components/Button';
 import { Address } from '../../types/Address';
+import { AddressItem } from '../../components/AddressItem';
 
 const MyAddresses = (data: Props) => {
   const { setToken, setUser } = useAuthContext();
@@ -32,6 +33,18 @@ const MyAddresses = (data: Props) => {
     router.push(`/${data.tenant.slug}/newaddress`);
   }
 
+  const handleAddressSelect = (address: Address) => {
+
+  }
+
+  const handleAddressEdit = (id: number) => {
+
+  }
+
+  const handleAddressDelete = (id: number) => {
+
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -46,7 +59,14 @@ const MyAddresses = (data: Props) => {
 
       <div className={styles.list}>
         {data.addresses.map((item, index) => (
-            <div key={index}>{item.street} - {item.number}</div>
+            <AddressItem 
+                key={index}
+                color={data.tenant.mainColor}
+                address={item}
+                onSelect={handleAddressSelect}
+                onEdit={handleAddressEdit}
+                onDelete={handleAddressDelete}
+            />
         ))}
       </div>
 
