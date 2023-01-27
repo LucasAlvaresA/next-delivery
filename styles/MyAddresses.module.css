@@ -1,0 +1,12 @@
+.container {
+    background-color: #FFF;
+    padding: 50px 24px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.list {
+    flex: 1;
+    border-top: 1.5px solid rgb(27, 27, 27, 0.1);
+}
