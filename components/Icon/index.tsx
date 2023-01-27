@@ -1,7 +1,9 @@
 import Card from "./card.svg";
 import Checked from "./checked.svg";
 import Cupom from "./cupom.svg";
-import Dots from "./dots.svg"
+import Delete from "./delete.svg";
+import Dots from "./dots.svg";
+import Edit from "./edit.svg";
 import Location from "./location.svg";
 import MailSend from "./mailSend.svg";
 import Money from "./money.svg";
@@ -22,7 +24,9 @@ export const Icon = ({ icon, color, width, height }: Props) => {
             {icon === "card" && <Card color={color} />}
             {icon === "checked" && <Checked color={color} />}
             {icon === "cupom" && <Cupom color={color} />}
+            {icon === "delete" && <Delete color={color} />}
             {icon === "dots" && <Dots color={color} />}
+            {icon === "edit" && <Edit color={color} />}
             {icon === "location" && <Location color={color} />}
             {icon === "mailSend" && <MailSend color={color} />}
             {icon === "money" && <Money color={color} />}
