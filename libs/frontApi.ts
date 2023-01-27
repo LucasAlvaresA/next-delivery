@@ -97,6 +97,11 @@ export const frontApi = (tenantSlug: string) => ({
         return addresses;
     },
 
+    addUserAddress: async (address : Address) => {
+        console.log(address);
+        return { ...address, id: 9};
+    },
+
     getShippingPrice: async (address: Address) => {
         return 9.50
     }
