@@ -1,0 +1,191 @@
+.container {
+    background-color: #FFF;
+    padding: 50px 24px;
+}
+
+.statusArea{
+    margin-top: 21px;
+    padding: 27px 23px;
+    border-radius: 4px;
+}
+
+.statusLongLabel{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+}
+
+.statusPct{
+    border-radius: 8px;
+    margin-top: 16px;
+    height: 8px;
+    background-color: rgba(0, 0, 0, .1);
+}
+
+.statusPctBar{
+    height: inherit;
+    border-radius: 8px;
+}
+
+.statusMsg{
+    margin-top: 8px;
+    font-weight: 400;
+    font-size: 10px;
+    color: rgba(0, 0, 0, .7);
+}
+
+.orderInfoArea {
+    display: flex;
+    align-items: center;
+    border-bottom: 1.5px solid rgba(27, 27, 27, 0.1);
+    padding: 15px 0;
+}   
+
+.orderInfoStatus {
+    font-weight: 600;
+    font-size: 11px;
+    padding: 6px 17px;
+    border-radius: 4px;
+}
+
+.orderInfoQt {
+    font-weight: 400;
+    font-size: 16px;
+    padding: 0 19px;
+}
+
+.orderInfoDate {
+    text-align: right;
+    font-weight: 400;
+    font-size: 16px;
+    color: #B3B3B3;
+    flex: 1;
+}
+
+.infoGroup {
+    border-top: 1.5px solid rgba(27, 27, 27, 0.1);
+    margin-bottom: 40px;
+}
+
+.infoArea {
+    padding-top: 24px;
+}
+
+.infoArea .infoTitle {
+    font-weight: 400;
+    font-size: 16px;
+    color: #1B1B1B;
+    margin-bottom: 8px;
+}
+
+.paymentTypes {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.paymentTypes .paymentBtn {
+    flex: 1;
+}
+
+.cupomInput {
+    display: flex;
+    gap: 14px;
+}
+
+.productsQuantity {
+    border-top: 1.5px solid rgba(27, 27, 27, .1);
+    border-bottom: 1.5px solid rgba(27, 27, 27, .1);
+    padding: 19px 0;
+    font-size: 16px;
+    font-weight: 400;
+    color: #1B1B1B;
+}
+
+.shippingArea { 
+    margin-top: 31px;
+}
+
+.shippingTitle {
+    font-weight: 400;
+    font-size: 16px;
+    color: #6A7D8B;
+    margin-bottom: 16px;
+}
+
+.shippingForm {
+    display: flex;
+    gap: 14px;
+}
+
+.shippingInfo {
+    background-color: #F9F9FA;
+    border-radius: 8px;
+    margin-top: 16px;
+    padding: 24px 32px;
+}
+
+.shippingAddress {
+    font-weight: 400;
+    font-size: 10px;
+    color: #6A7D8B;
+}
+
+.shippingTime {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.shippingTimeText {
+    font-weight: 400;
+    font-size: 16px;
+    color: #000;
+}
+
+.shippingPrice {
+    font-weight: 600;
+    font-size: 16px;
+    color: #000;
+}
+
+.resumeArea {
+    background-color: #F9F9FB;
+    border-radius: 8px;
+    margin-top: 16px;
+    padding: 48px 32px;
+}
+
+.resumeItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.resumeLeft {
+    font-weight: 400;
+    font-size: 16px;
+    color: #000;
+}
+
+.resumeRight {
+    font-weight: 500;
+    font-size: 16px;
+    color: #000;
+}
+
+.resumeLine {
+    border-top: 1px dashed #96A3AB;
+    margin-bottom: 29px;
+}
+
+.resumeRightBig {
+    font-weight: 600;
+    font-size: 24px;
+    color: #000;
+}
+
+.resumeButton {
+    margin-top: 40px;
+}
+

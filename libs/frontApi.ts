@@ -163,5 +163,9 @@ export const frontApi = (tenantSlug: string) => ({
         cart: CartItem[]
     ) => {
         return TEMPORARYorder;
+    },
+
+    getOrder: async (orderid: number) => {
+        return TEMPORARYorder;
     }
 });
